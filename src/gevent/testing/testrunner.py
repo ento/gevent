@@ -496,7 +496,7 @@ class Discovery(object):
                 cmd = self.__begin_command()
                 cmd.append('-m')
                 cmd.append('unittest')
-                # cmd.append('-v')
+                cmd.append('-v')
                 for name in group:
                     cmd.append(name)
                 self.commands.insert(0, (cmd, DEFAULT_RUN_OPTIONS.copy()))
