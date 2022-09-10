@@ -10,6 +10,10 @@ class TestSubnormalFloatsAreNotDisabled(unittest.TestCase):
     disabled the moment when gevent was imported. This impacted libraries
     that expect subnormal floats to be enabled.
     """
+
+    # Testing only on versions that support the convenient math.nextafter()
+    # function should be sufficient.
+    @unittest.skipUnless(PY39, "Need math.nextafter()")
     def test_subnormal_is_not_zero(self):
         import gevent
 
