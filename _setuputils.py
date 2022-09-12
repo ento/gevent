@@ -36,7 +36,7 @@ DEFINE_MACROS = []
 
 
 if WIN:
-    LIBRARIES += ['ws2_32']
+    LIBRARIES += ['ws2_32', 'iphlpapi']
     DEFINE_MACROS += [('FD_SETSIZE', '1024'), ('_WIN32', '1')]
 
 ### File handling
