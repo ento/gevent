@@ -1,7 +1,5 @@
-import math
+import sys
 import unittest
-
-from gevent.testing import PY39
 
 
 class TestSubnormalFloatsAreNotDisabled(unittest.TestCase):
@@ -10,11 +8,13 @@ class TestSubnormalFloatsAreNotDisabled(unittest.TestCase):
     disabled the moment when gevent was imported. This impacted libraries
     that expect subnormal floats to be enabled.
     """
-    @unittest.skipUnless(PY39, "Need math.nextafter()")
     def test_subnormal_is_not_zero(self):
         import gevent
 
-        assert math.nextafter(0, 1) != 0
+        # `sys.float_info.min` is the minimum normalized float, so dividing it
+        # by two gives us a subnormal number. To verify that subnormal floats
+        # are enabled, we check that it's not considered equal to zero.
+        assert (sys.float_info.min / 2) > 0
 
 
 if __name__ == "__main__":
